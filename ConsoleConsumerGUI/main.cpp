@@ -7,14 +7,15 @@ int main()
 {
 	Menu menu;
 	
-	std::string userInput;
-
-	while (true)
+	while (menu.isExitInitiated() == false)
 	{
 		menu.showCurrentStateOptions();
-		menu.processUserInput();
+		menu.showStateServiceInfo();
 
-		system("CLS");
+		auto userInput = menu.processUserInput();
+		menu.Update(userInput);
+		
+		menu.clearConsoleScreen();
 	}
 
 	return 0;

@@ -1,2 +1,9 @@
-﻿  main.cpp
+﻿  Base_State.cpp
+  Connected_State.cpp
+  ConsoleMenu.cpp
+  Initial_State.cpp
+  main.cpp
+  Subscribed_State.cpp
+  Updated_State.cpp
+  Создание кода...
   ConsoleConsumerGUI.vcxproj -> C:\Users\nikita.katechkin\source\repos\ConsoleConsumerGUI\x64\Debug\ConsoleConsumerGUI.exe

@@ -2,3 +2,4 @@ Update network interfaces list | Exit
 Update network interfaces list | Show available interfaces | Choose interface to connect | Connect to choosed interface | Exit
 Show available devices on interfaces | Choose device to subscribe | Subscribe to device | Stop discovering interface | Exit
 Update information from device | Unsubscribe from device | Exit
+<Empty options list>

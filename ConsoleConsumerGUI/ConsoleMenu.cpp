@@ -1,9 +1,10 @@
 #include "ConsoleMenu.h"
 
-Menu::Menu()
+Menu::Menu():
+    m_state(ConsumerGUIState::Initial_State),
+    m_stateHandler(new InitialState()),
+    m_isExitInitiated(false)
 {
-	m_state = ConsumerGUIState::Initial_State;
-
     ExtractOptionsForStates();
 }
 
@@ -22,7 +23,60 @@ void Menu::showCurrentStateOptions()
     ShowOptionsForState(m_state);
 }
 
-void Menu::processUserInput()
+void Menu::showStateServiceInfo()
+{
+    std::cout << "------------------------------------------------------------" << std::endl;
+    std::cout << "~~~~~~~~~~~~~~~~~~~~~~SERVICE INFO~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+    std::cout << std::endl;
+
+    switch (m_state)
+    {
+    case ConsumerGUIState::Initial_State:
+    {
+        std::cout << "<NO SERVICE DATA AVAILABLE>" << std::endl;
+
+        break;
+    }
+    case ConsumerGUIState::Updated_State:
+    {
+        std::cout << "Interfaces list: " << "<NO INTERFACE AVAILABLE>" << std::endl;
+
+        break;
+    }
+    case ConsumerGUIState::Connected_State:
+    {
+        std::cout << "Active interface: " << "<DEFAULT INTERACE>" << std::endl;
+        std::cout << "Devices list: " << "<NO DEVICE AVAILABLE>" << std::endl;
+
+        break;
+    }
+    case ConsumerGUIState::Subscribed_State:
+    {
+        std::cout << "Subscribed device: " << "<DEFAULT DEVICE>" << std::endl;
+        std::cout << "Device data: " << "<NO DATA RECIEVED>" << std::endl;
+
+        break;
+    }
+    case ConsumerGUIState::Exit_State:
+    {
+        std::cout << "<NO SERVICE DATA AVAILABLE>" << std::endl;
+
+        break;
+    }
+    default:
+    {
+        std::cout << "<NO SERVICE DATA AVAILABLE>" << std::endl;
+
+        break;
+    }
+    }
+
+    std::cout << std::endl;
+    std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+    std::cout << "------------------------------------------------------------" << std::endl;
+}
+
+unsigned int Menu::processUserInput()
 {
     std::cout << "Input index of command: ";
 
@@ -38,13 +92,75 @@ void Menu::processUserInput()
 
         if (isInputValid == false)
         {
-            system("CLS");
+            clearConsoleScreen();
 
             showCurrentStateOptions();
 
-            std::cout << "Input index of command (wrong index or index out of bounds was provided):";
+            std::cout << "Input index of command (bad input or index out of bounds was provided):";
         }
     }
+
+    return userInput;
+}
+
+void Menu::clearConsoleScreen()
+{
+    std::cout << std::flush;
+    system("CLS");
+}
+
+void Menu::Update(const unsigned int option)
+{
+    m_state = m_stateHandler->Update(option);
+
+    if (m_stateHandler != nullptr)
+    {
+        delete m_stateHandler;
+    }
+
+    switch (m_state)
+    {
+    case ConsumerGUIState::Initial_State:
+    {   
+        m_stateHandler = new InitialState();
+
+        break;
+    }
+    case ConsumerGUIState::Updated_State:
+    {
+        m_stateHandler = new UpdatedState();
+
+        break;
+    }
+    case ConsumerGUIState::Connected_State:
+    {
+        m_stateHandler = new ConnectedState();
+
+        break;
+    }
+    case ConsumerGUIState::Subscribed_State:
+    {
+        m_stateHandler = new SubscribedState();
+
+        break;
+    }
+    case ConsumerGUIState::Exit_State:
+    {
+        m_stateHandler = new InitialState();
+        m_isExitInitiated = true;
+
+        break;
+    }
+    default:
+    {
+        break;
+    }
+    }
+}
+
+bool Menu::isExitInitiated()
+{
+    return m_isExitInitiated;
 }
 
 void Menu::ExtractOptionsForStates()
@@ -98,10 +214,7 @@ void Menu::ExtractOptionsForStates()
 void Menu::ShowOptionsForState(const ConsumerGUIState& state)
 {
     std::cout << "------------------------------------------------------------" << std::endl;
-    std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "Available options: (input index of command to execute it)" << std::endl;
+    std::cout << "~~~~~~~~~~~~~~~~~~~~AVAILABLE OPTIONS~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
     std::cout << std::endl;
 
     for (size_t optionIndex = 0; optionIndex < m_optionsForStates[state].size(); optionIndex++)

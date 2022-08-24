@@ -127,13 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Base_State.cpp" />
+    <ClCompile Include="Connected_State.cpp" />
     <ClCompile Include="ConsoleMenu.cpp" />
+    <ClCompile Include="Initial_State.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Subscribed_State.cpp" />
+    <ClCompile Include="Updated_State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base_State.h" />
+    <ClInclude Include="Connected_State.h" />
     <ClInclude Include="ConsoleMenu.h" />
     <ClInclude Include="Initial_State.h" />
     <ClInclude Include="States.h" />
+    <ClInclude Include="Subscribed_State.h" />
+    <ClInclude Include="Updated_State.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="OptionsConfig.txt" />

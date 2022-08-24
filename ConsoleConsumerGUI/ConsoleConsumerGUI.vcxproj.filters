@@ -16,12 +16,30 @@
     <Filter Include="Файлы заголовков\States">
       <UniqueIdentifier>{f3d12f90-3154-4464-aecf-2de87a9ee73c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\States">
+      <UniqueIdentifier>{6c618fc0-22a7-40ca-8156-0e1ded66e955}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleMenu.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Base_State.cpp">
+      <Filter>Исходные файлы\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Initial_State.cpp">
+      <Filter>Исходные файлы\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Updated_State.cpp">
+      <Filter>Исходные файлы\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Connected_State.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Subscribed_State.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -34,6 +52,18 @@
     </ClInclude>
     <ClInclude Include="ConsoleMenu.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Base_State.h">
+      <Filter>Файлы заголовков\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Updated_State.h">
+      <Filter>Файлы заголовков\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Connected_State.h">
+      <Filter>Файлы заголовков\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Subscribed_State.h">
+      <Filter>Файлы заголовков\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
